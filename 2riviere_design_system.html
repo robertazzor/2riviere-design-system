@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2Riviere — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Inter:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:      #1C2B4A;
+  --acqua:     #3D8B8B;
+  --acqua-lt:  #6BB8B8;
+  --sabbia:    #E2D5BE;
+  --sabbia-lt: #F5F0E8;
+  --grafite:   #2D2D2D;
+  --mid:       #8A8A8A;
+  --white:     #FFFFFF;
+}
+
+body {
+  background: #F0EDE8;
+  font-family: 'Inter', sans-serif;
+  color: var(--grafite);
+  min-height: 100vh;
+}
+
+/* ── TABS ── */
+.tabs {
+  display: flex;
+  background: var(--navy);
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 2px;
+  overflow-x: auto;
+}
+.tab {
+  padding: 16px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all .2s;
+  white-space: nowrap;
+  user-select: none;
+}
+.tab:hover { color: rgba(255,255,255,.75); }
+.tab.active { color: #fff; border-bottom-color: var(--acqua); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  background: var(--navy);
+  padding: 40px 48px 32px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.page-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--acqua-lt);
+  margin-bottom: 8px;
+}
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+}
+.page-title em {
+  font-style: italic;
+  color: var(--acqua-lt);
+}
+
+/* ── SECTIONS ── */
+.section { display: none; padding: 48px 48px; max-width: 1140px; margin: 0 auto; }
+.section.active { display: block; }
+
+.sec-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--acqua);
+  margin-bottom: 8px;
+}
+.sec-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.sec-intro {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+.divider {
+  height: 1px;
+  background: rgba(28,43,74,.1);
+  margin: 40px 0;
+}
+.sub-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--sabbia);
+  margin-top: 36px;
+}
+
+/* ════════════════════════════
+   PALETTE
+════════════════════════════ */
+.palette-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.swatch {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,.08);
+  background: var(--white);
+}
+.sw-color {
+  height: 110px;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 12px;
+}
+.sw-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,.2);
+  color: rgba(255,255,255,.9);
+  padding: 3px 7px;
+  border-radius: 3px;
+  backdrop-filter: blur(6px);
+}
+.sw-tag.on-light {
+  background: rgba(0,0,0,.1);
+  color: rgba(0,0,0,.5);
+}
+.sw-info { padding: 14px 14px 16px; }
+.sw-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.sw-hex {
+  font-family: 'Inter', monospace;
+  font-size: 12px;
+  color: var(--mid);
+  margin-bottom: 6px;
+}
+.sw-use {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.combos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.combo-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+}
+.combo-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+.code-block {
+  background: var(--navy);
+  border-radius: 10px;
+  padding: 24px 28px;
+  font-family: 'Inter', monospace;
+  font-size: 12.5px;
+  color: rgba(255,255,255,.55);
+  line-height: 2.2;
+  margin-top: 16px;
+}
+.code-key { color: var(--acqua-lt); }
+.code-val { color: var(--sabbia); }
+.code-root { color: rgba(255,255,255,.8); }
+
+/* ════════════════════════════
+   TYPOGRAPHY
+════════════════════════════ */
+.type-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+}
+.type-table th {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding: 14px 16px;
+  text-align: left;
+  background: #F8F7F5;
+  border-bottom: 1px solid var(--sabbia);
+}
+.type-table td {
+  padding: 18px 16px;
+  border-bottom: 1px solid #F0EDE8;
+  vertical-align: middle;
+}
+.type-table tr:last-child td { border-bottom: none; }
+.tt-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--mid);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+.tt-spec {
+  font-family: 'Inter', monospace;
+  font-size: 11px;
+  color: var(--mid);
+  line-height: 1.6;
+}
+.badge-row { display: flex; gap: 4px; flex-wrap: wrap; }
+.badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.b-pdf  { background:#FEF3C7; color:#92400E; }
+.b-ppt  { background:#EDE9FE; color:#5B21B6; }
+.b-web  { background:#D1FAE5; color:#065F46; }
+.b-tool { background:#DBEAFE; color:#1E40AF; }
+.b-ig   { background:#FCE7F3; color:#9D174D; }
+.b-fb   { background:#BFDBFE; color:#1E3A8A; }
+.b-li   { background:#E0E7FF; color:#3730A3; }
+.tt-why {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--mid);
+  line-height: 1.55;
+  max-width: 240px;
+}
+
+/* ════════════════════════════
+   SPECIMENS
+════════════════════════════ */
+.spec-block {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.07);
+}
+.spec-header {
+  background: var(--navy);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.spec-ch {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+.spec-fonts {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--acqua-lt);
+  font-weight: 500;
+}
+
+/* PDF */
+.pdf-inner {
+  padding: 40px 44px;
+  background: var(--sabbia-lt);
+}
+.pdf-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--acqua);
+  margin-bottom: 10px;
+}
+.pdf-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px;
+  font-weight: 300;
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: 6px;
+  letter-spacing: -.01em;
+}
+.pdf-rule { height: 1px; background: var(--sabbia); margin: 24px 0; }
+.pdf-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--acqua);
+  margin-bottom: 14px;
+  letter-spacing: .02em;
+}
+.pdf-body {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: var(--grafite);
+  line-height: 1.75;
+  max-width: 580px;
+  margin-bottom: 12px;
+}
+.pdf-caption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: .04em;
+  margin-top: 20px;
+}
+
+/* PPT */
+.slide {
+  background: var(--navy);
+  padding: 44px 48px;
+  position: relative;
+  overflow: hidden;
+  min-height: 240px;
+}
+.slide::before {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: rgba(61,139,139,.12);
+}
+.slide::after {
+  content: '';
+  position: absolute;
+  right: 60px; top: -20px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(61,139,139,.18);
+}
+.slide-ey {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--acqua-lt);
+  margin-bottom: 12px;
+  position: relative; z-index: 1;
+}
+.slide-h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  max-width: 520px;
+  position: relative; z-index: 1;
+}
+.slide-accent { width: 44px; height: 3px; background: var(--acqua); margin-bottom: 18px; position: relative; z-index: 1; }
+.slide-sub {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 18px;
+  position: relative; z-index: 1;
+}
+.slide-body {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,.8);
+  line-height: 1.65;
+  max-width: 480px;
+  position: relative; z-index: 1;
+}
+
+/* WEB */
+.web-nav-bar {
+  background: rgba(28,43,74,.97);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.web-logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .06em;
+}
+.web-links { display: flex; gap: 28px; }
+.web-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.web-hero {
+  padding: 56px 40px 44px;
+  background: linear-gradient(135deg, var(--sabbia-lt) 55%, rgba(61,139,139,.1) 100%);
+}
+.web-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 54px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.05;
+  margin-bottom: 18px;
+  max-width: 540px;
+}
+.web-h1 em { font-style: italic; color: var(--acqua); }
+.web-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #4A4A4A;
+  line-height: 1.7;
+  max-width: 460px;
+  margin-bottom: 28px;
+}
+.web-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--acqua);
+  color: #fff;
+  padding: 14px 26px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+.web-cta-sec {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid var(--navy);
+  color: var(--navy);
+  padding: 13px 24px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  margin-left: 12px;
+}
+
+/* TOOL */
+.tool-bar {
+  background: var(--white);
+  border-bottom: 1px solid #E8EBF0;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tool-logo-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: .05em;
+}
+.tool-badge-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--acqua);
+  background: rgba(61,139,139,.1);
+  padding: 3px 9px;
+  border-radius: 100px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.tool-grid {
+  background: #F8F9FB;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.tool-card {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 16px 18px;
+  border: 1px solid #E8EBF0;
+}
+.tool-lbl {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--mid);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.tool-val {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.tool-sub-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: var(--mid);
+  line-height: 1.5;
+}
+.tool-pill-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(61,139,139,.1);
+  color: var(--acqua);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-top: 6px;
+  letter-spacing: .05em;
+}
+
+/* ════════════════════════════
+   SOCIAL
+════════════════════════════ */
+.social-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.sc { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.1); background: #fff; }
+.sc-bar {
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.sc-dot { width: 7px; height: 7px; border-radius: 50%; }
+.sc-body-text {
+  padding: 12px 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--grafite);
+  line-height: 1.55;
+}
+.sc-body-text strong { color: var(--navy); font-weight: 700; }
+.sc-body-text em { color: var(--acqua); font-style: normal; font-weight: 600; }
+
+/* IG */
+.ig-post-img {
+  aspect-ratio: 1/1;
+  background: var(--navy);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px;
+  overflow: hidden;
+}
+.ig-post-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, rgba(61,139,139,.25) 0%, transparent 45%, rgba(20,30,55,.85) 100%);
+}
+.ig-circle {
+  position: absolute;
+  top: 18px; right: 18px;
+  width: 76px; height: 76px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.ig-circle-inner {
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  background: rgba(61,139,139,.25);
+  border: 1px solid rgba(107,184,184,.35);
+}
+.ig-wm {
+  position: absolute;
+  top: 16px; left: 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,.6);
+  z-index: 1;
+  letter-spacing: .05em;
+}
+.ig-ey {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--acqua-lt);
+  position: relative; z-index: 1;
+  margin-bottom: 6px;
+}
+.ig-hl {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.18;
+  position: relative; z-index: 1;
+  margin-bottom: 10px;
+}
+.ig-meta-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  color: rgba(255,255,255,.45);
+  position: relative; z-index: 1;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* FB */
+.fb-post-img {
+  background: var(--sabbia);
+  padding: 26px 24px 22px;
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+}
+.fb-post-img::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(61,139,139,.14);
+}
+.fb-wm {
+  position: absolute;
+  top: 16px; right: 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(28,43,74,.35);
+}
+.fb-ey {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--acqua);
+  margin-bottom: 10px;
+}
+.fb-hl {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+  max-width: 200px;
+  margin-bottom: 16px;
+  position: relative; z-index: 1;
+}
+.fb-btn {
+  display: inline-block;
+  background: var(--navy);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 3px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  position: relative; z-index: 1;
+}
+
+/* LI */
+.li-post-img {
+  background: linear-gradient(135deg, var(--navy) 0%, #253B60 100%);
+  padding: 28px 24px 22px;
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+}
+.li-post-img::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  border: 1px solid rgba(61,139,139,.25);
+}
+.li-post-img::after {
+  content: '';
+  position: absolute;
+  top: 15px; right: 15px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 1px solid rgba(61,139,139,.15);
+}
+.li-tag-text {
+  display: inline-block;
+  border: 1px solid rgba(107,184,184,.45);
+  color: var(--acqua-lt);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.li-hl {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  max-width: 220px;
+  margin-bottom: 18px;
+  position: relative; z-index: 1;
+}
+.li-stats {
+  display: flex;
+  gap: 24px;
+  position: relative; z-index: 1;
+}
+.li-stat-v {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+.li-stat-l {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  color: rgba(255,255,255,.45);
+  margin-top: 3px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.li-wm {
+  position: absolute;
+  bottom: 14px; right: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255,255,255,.2);
+  z-index: 1;
+}
+
+/* STORY */
+.story-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.story-card {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,0,0,.12);
+  aspect-ratio: 9/16;
+  max-height: 420px;
+  position: relative;
+}
+.story-content {
+  position: absolute;
+  inset: 0;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* LI BANNER */
+.li-banner-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.1);
+}
+.li-banner-inner {
+  background: linear-gradient(135deg, var(--navy) 0%, #253B60 55%, #1A3A3A 100%);
+  padding: 36px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.li-banner-inner::before {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  border: 1px solid rgba(61,139,139,.15);
+}
+.li-banner-inner::after {
+  content: '';
+  position: absolute;
+  right: 40px; top: 30px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  border: 1px solid rgba(61,139,139,.1);
+}
+.li-banner-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative; z-index: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-eyebrow">Design System v1.0 · Giugno 2025</div>
+  <div class="page-title">2Riviere — <em>Studio Consulenze</em><br>Immobiliari</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="show('palette',this)">🎨 Palette</div>
+  <div class="tab" onclick="show('typography',this)">Aa Tipografia</div>
+  <div class="tab" onclick="show('specimens',this)">📄 Specimen Canali</div>
+  <div class="tab" onclick="show('social',this)">📱 Social Media</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PALETTE
+══════════════════════════════════════════ -->
+<div class="section active" id="palette">
+  <div class="sec-label">Identità cromatica</div>
+  <div class="sec-heading">Palette — 5 token</div>
+  <p class="sec-intro">Sistema derivato dal territorio ligure: il navy profondo del mare al tramonto, l'acquamarina delle acque tra Savona e Imperia, la sabbia calda delle spiagge, l'ardesia grigio-grafite. Tutti i colori devono essere approvati prima di essere applicati a materiali definitivi.</p>
+
+  <div class="palette-row">
+    <div class="swatch">
+      <div class="sw-color" style="background:#1C2B4A;">
+        <span class="sw-tag">Primary</span>
+      </div>
+      <div class="sw-info">
+        <div class="sw-name">Navy Riviera</div>
+        <div class="sw-hex">#1C2B4A</div>
+        <div class="sw-use">Logo, header, struttura, testi primari su sfondo chiaro</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="sw-color" style="background:#3D8B8B;">
+        <span class="sw-tag">Accent</span>
+      </div>
+      <div class="sw-info">
+        <div class="sw-name">Acquamarina</div>
+        <div class="sw-hex">#3D8B8B</div>
+        <div class="sw-use">CTA, link, highlight, accento principale cross-canale</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="sw-color" style="background:#6BB8B8;">
+        <span class="sw-tag">Accent Light</span>
+      </div>
+      <div class="sw-info">
+        <div class="sw-name">Acqua Chiaro</div>
+        <div class="sw-hex">#6BB8B8</div>
+        <div class="sw-use">Testi su sfondi scuri, hover state, sottotitoli su navy</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="sw-color" style="background:#E2D5BE;">
+        <span class="sw-tag on-light">Warm</span>
+      </div>
+      <div class="sw-info">
+        <div class="sw-name">Sabbia Ligure</div>
+        <div class="sw-hex">#E2D5BE</div>
+        <div class="sw-use">Sezioni alternate, sfondi caldi, card PDF e social FB</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="sw-color" style="background:#F5F0E8;border:1px solid rgba(0,0,0,.06);">
+        <span class="sw-tag on-light">Neutral</span>
+      </div>
+      <div class="sw-info">
+        <div class="sw-name">Lino</div>
+        <div class="sw-hex">#F5F0E8</div>
+        <div class="sw-use">Background universale pagine, sfondo PDF ufficiali</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-label">Combinazioni approvate</div>
+  <div class="combos">
+    <div class="combo-chip" style="background:var(--navy);color:#fff;">
+      <span class="combo-dot" style="background:var(--acqua-lt)"></span>Navy + Acqua Chiaro — testi su dark bg
+    </div>
+    <div class="combo-chip" style="background:var(--sabbia-lt);color:var(--navy);border:1px solid var(--sabbia);">
+      <span class="combo-dot" style="background:var(--navy)"></span>Lino + Navy — body text standard
+    </div>
+    <div class="combo-chip" style="background:var(--acqua);color:#fff;">
+      <span class="combo-dot" style="background:rgba(255,255,255,.5)"></span>Acquamarina + Bianco — CTA buttons
+    </div>
+    <div class="combo-chip" style="background:var(--sabbia);color:var(--navy);border:1px solid rgba(0,0,0,.05);">
+      <span class="combo-dot" style="background:var(--acqua)"></span>Sabbia + Navy + Acqua — card PDF / social warm
+    </div>
+  </div>
+
+  <div class="sub-label" style="margin-top:40px;">Token CSS — copia e incolla</div>
+  <div class="code-block">
+    <span class="code-root">:root</span> {<br>
+    &nbsp;&nbsp;<span class="code-key">--color-primary:</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-val">#1C2B4A</span>;&nbsp; <span style="color:rgba(255,255,255,.25);">/* Navy Riviera */</span><br>
+    &nbsp;&nbsp;<span class="code-key">--color-accent:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-val">#3D8B8B</span>;&nbsp; <span style="color:rgba(255,255,255,.25);">/* Acquamarina */</span><br>
+    &nbsp;&nbsp;<span class="code-key">--color-accent-lt:</span>&nbsp;&nbsp;<span class="code-val">#6BB8B8</span>;&nbsp; <span style="color:rgba(255,255,255,.25);">/* Acqua Chiaro */</span><br>
+    &nbsp;&nbsp;<span class="code-key">--color-warm:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-val">#E2D5BE</span>;&nbsp; <span style="color:rgba(255,255,255,.25);">/* Sabbia Ligure */</span><br>
+    &nbsp;&nbsp;<span class="code-key">--color-bg:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-val">#F5F0E8</span>;&nbsp; <span style="color:rgba(255,255,255,.25);">/* Lino */</span><br>
+    &nbsp;&nbsp;<span class="code-key">--color-text:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-val">#2D2D2D</span>;&nbsp; <span style="color:rgba(255,255,255,.25);">/* Grafite */</span><br>
+    }
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TYPOGRAPHY
+══════════════════════════════════════════ -->
+<div class="section" id="typography">
+  <div class="sec-label">Sistema tipografico</div>
+  <div class="sec-heading">Font per canale — da approvare</div>
+  <p class="sec-intro">Ogni canale ha esigenze diverse: la stampa richiede resa ad alta risoluzione, il web velocità e leggibilità su mobile, le slide leggibilità a distanza. Ogni abbinamento è motivato e va confermato prima di applicarlo ai materiali definitivi.</p>
+
+  <table class="type-table">
+    <thead>
+      <tr>
+        <th style="width:22%">Ruolo · Preview</th>
+        <th style="width:16%">Font</th>
+        <th style="width:18%">Specifiche</th>
+        <th style="width:18%">Canali</th>
+        <th>Motivazione</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="tt-role">Display H1 — Docs</span>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--navy);font-weight:300;line-height:1.1;">Perizia<br>di Stima</div>
+        </td>
+        <td style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--navy);">Cormorant<br>Garamond</td>
+        <td class="tt-spec">Light 300<br>36–48px<br>tracking –0.01em</td>
+        <td><div class="badge-row"><span class="badge b-pdf">PDF</span></div></td>
+        <td class="tt-why">Autorevolezza editoriale senza rigidità. Resa eccellente in stampa e PDF ad alta res. Evoca la qualità di un report tecnico firmato.</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="tt-role">Display Hero — Web/IG/FB</span>
+          <div style="font-family:'Playfair Display',serif;font-size:30px;color:var(--navy);font-weight:900;font-style:italic;line-height:1.1;">La Riviera</div>
+        </td>
+        <td style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--navy);">Playfair<br>Display</td>
+        <td class="tt-spec">Black 900 Italic<br>48–80px<br>tracking –0.02em</td>
+        <td><div class="badge-row"><span class="badge b-web">Web</span><span class="badge b-ig">IG</span><span class="badge b-fb">FB</span></div></td>
+        <td class="tt-why">Impatto lifestyle, richiama riviste di territorio di alto livello. È il singolo elemento ad alta temperatura visiva del brand — usato con parsimonia.</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="tt-role">Titoli Slide / LinkedIn</span>
+          <div style="font-family:'Montserrat',sans-serif;font-size:22px;color:var(--navy);font-weight:700;line-height:1.1;">INVESTIMENTO<br>LIGURIA</div>
+        </td>
+        <td style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--navy);">Montserrat</td>
+        <td class="tt-spec">Bold 700<br>24–40px<br>tracking +0.01em</td>
+        <td><div class="badge-row"><span class="badge b-ppt">PPT</span><span class="badge b-li">LinkedIn</span></div></td>
+        <td class="tt-why">Leggibile a distanza su schermo proiettato. Geometrico e autorevole nei pitch deck per investitori. Funziona bene in uppercase per heading LinkedIn.</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="tt-role">Body Documenti</span>
+          <div style="font-family:'Source Sans 3',sans-serif;font-size:13px;color:var(--grafite);line-height:1.7;max-width:200px;">Il valore è determinato dalle quotazioni OMI del II semestre...</div>
+        </td>
+        <td style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--navy);">Source<br>Sans 3</td>
+        <td class="tt-spec">Regular 400<br>12–15px<br>line-height 1.7</td>
+        <td><div class="badge-row"><span class="badge b-pdf">PDF</span><span class="badge b-ppt">PPT</span></div></td>
+        <td class="tt-why">Ottima resa in stampa e PDF. Spaziatura generosa ideale per testi lunghi e tabelle dati OMI. Non stanca la lettura su perizie di più pagine.</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="tt-role">Body Slide</span>
+          <div style="font-family:'Lato',sans-serif;font-size:13px;color:var(--grafite);line-height:1.65;">Rendimento netto stimato<br>5,2% — Zona costiera</div>
+        </td>
+        <td style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--navy);">Lato</td>
+        <td class="tt-spec">Light 300 / Regular 400<br>13–16px<br>line-height 1.6</td>
+        <td><div class="badge-row"><span class="badge b-ppt">PPT</span></div></td>
+        <td class="tt-why">Non compete visivamente con Montserrat nei titoli. Elegante nelle slide con dati numerici. Leggibile su schermo proiettato a 5–8 metri.</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="tt-role">UI / Dashboard / Web body</span>
+          <div style="font-family:'Inter',sans-serif;font-size:13px;color:var(--grafite);line-height:1.6;font-weight:500;">€ 2.850/m² · OMI 2024<br><span style="font-weight:400;color:var(--mid);">Zona A3 · Stato ottimo</span></div>
+        </td>
+        <td style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--navy);">Inter</td>
+        <td class="tt-spec">Regular 400 / Medium 500<br>Bold 700 · 11–16px<br>numeri tabulari</td>
+        <td><div class="badge-row"><span class="badge b-tool">Tool</span><span class="badge b-web">Web</span></div></td>
+        <td class="tt-why">Progettato specificamente per schermi ad alta densità. Numeri tabulari precisi per valori €/m² e rendimenti. Standard de facto per UI digitali professionali.</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="tt-role">Eyebrow / Label — ovunque</span>
+          <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acqua);margin-top:4px;">PROVINCIA DI SAVONA</div>
+        </td>
+        <td style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--navy);">Montserrat</td>
+        <td class="tt-spec">Bold 700 · ALL CAPS<br>9–11px<br>tracking +0.18em</td>
+        <td><div class="badge-row"><span class="badge b-pdf">PDF</span><span class="badge b-ppt">PPT</span><span class="badge b-web">Web</span><span class="badge b-ig">IG</span><span class="badge b-li">LinkedIn</span></div></td>
+        <td class="tt-why">Il filo rosso cross-canale del brand. L'eyebrow Montserrat uppercase in acquamarina è l'elemento di consistenza riconoscibile su tutti i materiali 2Riviere.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SPECIMENS
+══════════════════════════════════════════ -->
+<div class="section" id="specimens">
+  <div class="sec-label">Specimen per canale</div>
+  <div class="sec-heading">Come appare il brand in uso</div>
+  <p class="sec-intro">Mockup funzionali con contenuto reale 2Riviere. Ogni blocco mostra la coppia tipografica nel suo contesto naturale, con colori e gerarchia corretti.</p>
+
+  <!-- PDF -->
+  <div class="spec-block">
+    <div class="spec-header">
+      <span class="spec-ch">📄 PDF — Perizia / Dossier / Valutazione OMI</span>
+      <span class="spec-fonts">Cormorant Garamond + Source Sans 3</span>
+    </div>
+    <div class="pdf-inner">
+      <div class="pdf-eyebrow">Provincia di Savona · Zona Omogenea A3 · Centro Storico</div>
+      <div class="pdf-h1">Perizia di Stima<br>Immobile Residenziale</div>
+      <div class="pdf-rule"></div>
+      <div class="pdf-h2">Analisi del Valore di Mercato</div>
+      <div class="pdf-body">Il valore di mercato dell'unità immobiliare sita in Via Torino 13, Savona è stato determinato attraverso l'applicazione della metodologia comparativa diretta (MCA), con riferimento alle quotazioni OMI del II semestre 2024 per la zona omogenea A3.</div>
+      <div class="pdf-body" style="color:#5A5A5A;">Il coefficiente correttivo applicato per lo stato conservativo <em>buono</em> è pari a +8%, mentre la pertinenza del box auto contribuisce per un incremento stimato del 6% sul valore complessivo dell'unità.</div>
+      <div class="pdf-rule"></div>
+      <div class="pdf-caption">Fonte: Agenzia delle Entrate — OMI · II sem. 2024 · Elaborazione: 2Riviere Studio Consulenze Immobiliari · Via Verdi 102R, Savona (SV)</div>
+    </div>
+  </div>
+
+  <!-- PPT -->
+  <div class="spec-block">
+    <div class="spec-header">
+      <span class="spec-ch">📊 PowerPoint — Investor Pitch / Dossier</span>
+      <span class="spec-fonts">Montserrat Bold + Lato Light</span>
+    </div>
+    <div class="slide">
+      <div class="slide-ey">Opportunità di Investimento · Liguria Occidentale · 2025</div>
+      <div class="slide-h1">Rendimento Netto 5,8%<br>Student Housing — Savona</div>
+      <div class="slide-accent"></div>
+      <div class="slide-sub">Provincia di Savona · PNRR Eligible · Timeline 2024–2026</div>
+      <div class="slide-body">Operazione di riconversione urbana con destinazione Student Housing. Canone medio stimato €420/mese per unità. Exit strategy a 5 anni con rivalutazione attesa del 18% sul capitale investito.</div>
+    </div>
+  </div>
+
+  <!-- WEB -->
+  <div class="spec-block">
+    <div class="spec-header">
+      <span class="spec-ch">🌐 Landing Page / Sito Web — Hero</span>
+      <span class="spec-fonts">Playfair Display Black Italic + Inter Regular</span>
+    </div>
+    <div>
+      <div class="web-nav-bar">
+        <span class="web-logo-text">2Riviere</span>
+        <div class="web-links">
+          <span class="web-link">Vendere</span>
+          <span class="web-link">Comprare</span>
+          <span class="web-link">Investire</span>
+          <span class="web-link">Chi siamo</span>
+        </div>
+      </div>
+      <div class="web-hero">
+        <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--acqua);margin-bottom:14px;">Studio Consulenze Immobiliari · Savona · Liguria</div>
+        <div class="web-h1">La Riviera<br>è un <em>investimento.</em></div>
+        <div class="web-body">Consulenza immobiliare professionale tra Savona, Genova e Imperia. Analisi dati OMI, valutazioni certificate, operazioni di sviluppo. Il territorio lo conosciamo dall'interno.</div>
+        <div class="web-cta">Richiedi una consulenza →</div>
+        <span class="web-cta-sec">Le nostre operazioni</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL -->
+  <div class="spec-block">
+    <div class="spec-header">
+      <span class="spec-ch">🛠️ Tool Digitale — Dashboard Valutatore OMI</span>
+      <span class="spec-fonts">Inter (uniforme su tutti i livelli)</span>
+    </div>
+    <div>
+      <div class="tool-bar">
+        <span class="tool-logo-text">2Riviere</span>
+        <span class="tool-badge-text">Valutatore OMI</span>
+        <span style="font-family:'Inter',sans-serif;font-size:11px;color:var(--mid);margin-left:auto;">Aggiornato: II sem. 2024</span>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-card">
+          <div class="tool-lbl">Valore stimato</div>
+          <div class="tool-val">€148.500</div>
+          <div class="tool-sub-text">Via Torino, Savona · 68 m²</div>
+          <div class="tool-pill-text">↑ +4,2% vs. 2023</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-lbl">Quotazione OMI</div>
+          <div class="tool-val">2.850</div>
+          <div class="tool-sub-text">€/m² · Stato ottimo<br>Zona A3 · II sem. 2024</div>
+          <div class="tool-pill-text">Fonte: AdE OMI</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-lbl">Rendimento lordo</div>
+          <div class="tool-val">5,8%</div>
+          <div class="tool-sub-text">Canone €720/mese<br>stima da mercato</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-lbl">Cap Rate netto</div>
+          <div class="tool-val">4,3%</div>
+          <div class="tool-sub-text">Spese e fiscalità<br>incluse nella stima</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SOCIAL
+══════════════════════════════════════════ -->
+<div class="section" id="social">
+  <div class="sec-label">Social media</div>
+  <div class="sec-heading">Specimen per piattaforma</div>
+  <p class="sec-intro">Mockup in scala per Instagram, Facebook e LinkedIn — post quadrato 1:1, story verticale 9:16, banner LinkedIn. Ogni piattaforma mantiene il DNA visivo 2Riviere adattando tono e formato alle aspettative di quell'audience.</p>
+
+  <!-- POST 1:1 -->
+  <div class="sub-label">Post quadrato 1080×1080px</div>
+  <div class="social-grid-3">
+
+    <!-- INSTAGRAM -->
+    <div class="sc">
+      <div class="sc-bar" style="background:linear-gradient(90deg,#833ab4,#fd1d1d,#fcb045);color:#fff;">
+        <span class="sc-dot" style="background:rgba(255,255,255,.5)"></span>Instagram · Post 1:1
+      </div>
+      <div class="ig-post-img">
+        <div class="ig-wm">2Riviere</div>
+        <div class="ig-circle"><div class="ig-circle-inner"></div></div>
+        <div class="ig-ey">Savona · Riviera di Ponente</div>
+        <div class="ig-hl">Il mare non<br>svaluta mai.</div>
+        <div class="ig-meta-text">Consulenza Immobiliare · Liguria</div>
+      </div>
+      <div class="sc-body-text">
+        <strong>Comprare sul mare non è un capriccio.</strong> È una scelta patrimoniale. Scopri come valutiamo un immobile costiero con dati OMI reali → link in bio<br><br>
+        <span style="color:var(--acqua);">#immobiliare #liguria #savona #consulenzaimmobiliare #riviera</span>
+      </div>
+    </div>
+
+    <!-- FACEBOOK -->
+    <div class="sc">
+      <div class="sc-bar" style="background:#1877F2;color:#fff;">
+        <span class="sc-dot" style="background:rgba(255,255,255,.5)"></span>Facebook · Post 1:1
+      </div>
+      <div class="fb-post-img">
+        <div class="fb-wm">2Riviere</div>
+        <div class="fb-ey">Valutazione gratuita</div>
+        <div class="fb-hl">Sai quanto vale davvero il tuo immobile?</div>
+        <div class="fb-btn">Scopri il valore →</div>
+      </div>
+      <div class="sc-body-text">
+        <strong>Non affidarti alle stime online.</strong> La nostra perizia parte dai dati OMI reali e da una conoscenza diretta del territorio tra Savona, Genova e Imperia.<br><br>
+        Contattaci per una consulenza <em>senza impegno</em>. Risposta entro 24h.
+      </div>
+    </div>
+
+    <!-- LINKEDIN -->
+    <div class="sc">
+      <div class="sc-bar" style="background:#0A66C2;color:#fff;">
+        <span class="sc-dot" style="background:rgba(255,255,255,.5)"></span>LinkedIn · Post 1:1
+      </div>
+      <div class="li-post-img">
+        <div class="li-tag-text">Market Update · 2024</div>
+        <div class="li-hl">Liguria: +4,2% sul residenziale costiero</div>
+        <div class="li-stats">
+          <div>
+            <div class="li-stat-v">€2.850</div>
+            <div class="li-stat-l">€/m² Centro Savona</div>
+          </div>
+          <div>
+            <div class="li-stat-v">5,8%</div>
+            <div class="li-stat-l">Rendimento lordo</div>
+          </div>
+        </div>
+        <div class="li-wm">2Riviere</div>
+      </div>
+      <div class="sc-body-text">
+        I dati OMI del II semestre 2024 confermano una <em>rivalutazione stabile</em> del residenziale costiero ligure. <strong>Condivido l'analisi completa per la Provincia di Savona</strong> — commenti aperti per chi opera nel settore.<br><br>
+        #RealEstate #Liguria #MercatoImmobiliare #OMI #Savona
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY 9:16 -->
+  <div class="sub-label" style="margin-top:48px;">Story verticale 1080×1920px</div>
+  <div class="story-row">
+
+    <!-- IG STORY -->
+    <div class="story-card" style="background:var(--navy);">
+      <div style="position:absolute;inset:0;background:linear-gradient(165deg,rgba(61,139,139,.2) 0%,transparent 50%,rgba(10,15,30,.6) 100%);"></div>
+      <div style="position:absolute;top:50px;right:24px;width:100px;height:100px;border:1px solid rgba(107,184,184,.25);border-radius:50%;"></div>
+      <div style="position:absolute;top:70px;right:44px;width:60px;height:60px;border-radius:50%;background:rgba(61,139,139,.15);border:1px solid rgba(107,184,184,.2);"></div>
+      <div class="story-content">
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);">2Riviere · IG Story</div>
+        </div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--acqua-lt);margin-bottom:10px;">Opportunità</div>
+          <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:14px;">Trilocale<br>a 200m<br>dal mare</div>
+          <div style="width:36px;height:2px;background:var(--acqua);margin-bottom:14px;"></div>
+          <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.6);line-height:1.65;">Savona Centro · 68 m²<br>€ 148.500 · Classe E<br>Box incluso</div>
+        </div>
+        <div>
+          <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;">↑ Swipe per i dettagli</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FB STORY -->
+    <div class="story-card" style="background:var(--sabbia-lt);">
+      <div style="position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(61,139,139,.1);"></div>
+      <div class="story-content">
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);">2Riviere · FB Story</div>
+        </div>
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acqua);margin-bottom:12px;">Consiglio del giorno</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:16px;">Prima di<br>vendere,<br>conosci<br>il vero valore.</div>
+          <div style="font-family:'Inter',sans-serif;font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:22px;">Le stime online possono sbagliare fino al 25%. Una perizia OMI certificata protegge la tua trattativa.</div>
+          <div style="display:inline-block;background:var(--navy);color:#fff;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;padding:10px 20px;border-radius:3px;letter-spacing:.04em;">Contattaci ora</div>
+        </div>
+        <div>
+          <div style="font-family:'Inter',sans-serif;font-size:9px;color:var(--mid);letter-spacing:.06em;text-transform:uppercase;">Studio Consulenze Immobiliari · Savona</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LI STORY -->
+    <div class="story-card" style="background:linear-gradient(170deg,#0A1929 0%,var(--navy) 55%,#253B60 100%);">
+      <div style="position:absolute;top:60px;right:-20px;width:160px;height:160px;border-radius:50%;border:1px solid rgba(61,139,139,.18);"></div>
+      <div class="story-content">
+        <div>
+          <div style="display:inline-block;border:1px solid rgba(107,184,184,.3);color:var(--acqua-lt);font-family:'Inter',sans-serif;font-size:9px;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:.1em;text-transform:uppercase;">Report Mensile</div>
+        </div>
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;">Mercato Liguria</div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:28px;font-weight:700;color:#fff;line-height:1.15;margin-bottom:22px;">5 trend da<br>monitorare<br>nel 2025</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,.65);padding-left:12px;border-left:2px solid var(--acqua);line-height:1.4;">Student Housing PNRR</div>
+            <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,.65);padding-left:12px;border-left:2px solid var(--acqua);line-height:1.4;">Riqualificazione costiera</div>
+            <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,.65);padding-left:12px;border-left:2px solid var(--acqua);line-height:1.4;">Affitti brevi vs. long stay</div>
+            <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,.35);padding-left:12px;border-left:1px solid rgba(255,255,255,.1);line-height:1.4;">+ 2 nel report completo</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:.08em;">2RIVIERE · SCI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LI BANNER -->
+  <div class="sub-label" style="margin-top:48px;">LinkedIn Banner / Cover 1584×396px</div>
+  <div class="li-banner-wrap">
+    <div class="li-banner-inner">
+      <div class="li-banner-flex">
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--acqua-lt);margin-bottom:10px;">Studio Consulenze Immobiliari</div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;color:#fff;line-height:1.05;margin-bottom:6px;">2Riviere</div>
+          <div style="font-family:'Lato',sans-serif;font-size:14px;color:rgba(255,255,255,.45);font-weight:300;letter-spacing:.05em;">Savona · Genova · Imperia</div>
+        </div>
+        <div style="display:flex;gap:44px;align-items:center;">
+          <div style="text-align:center;">
+            <div style="font-family:'Montserrat',sans-serif;font-size:26px;font-weight:700;color:#fff;letter-spacing:.04em;">OMI</div>
+            <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;">Certified</div>
+          </div>
+          <div style="width:1px;height:48px;background:rgba(255,255,255,.1);"></div>
+          <div style="text-align:center;">
+            <div style="font-family:'Montserrat',sans-serif;font-size:26px;font-weight:700;color:#fff;letter-spacing:.04em;">PNRR</div>
+            <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;">Ready</div>
+          </div>
+          <div style="width:1px;height:48px;background:rgba(255,255,255,.1);"></div>
+          <div style="text-align:center;">
+            <div style="font-family:'Montserrat',sans-serif;font-size:26px;font-weight:700;color:#fff;">5,8%</div>
+            <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;">Avg. Yield</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
